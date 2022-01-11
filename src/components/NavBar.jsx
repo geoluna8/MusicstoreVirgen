@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Badge } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo.png';
+import CartWidget from './CartWidget';
 
-const NavBar = (props) => {
-    return <Fragment>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+const NavBar = ({titulo}) => {
+    return  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="#home">
-                        <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top"/>{' '}{props.titulo}
+                        <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top"/>{' '}{titulo}
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -27,8 +27,11 @@ const NavBar = (props) => {
                         </Nav>
                         <Nav>
                         <Badge pill bg="success">
-                        <FontAwesomeIcon icon={faUser} /> Login
+                            <FontAwesomeIcon icon={faUser} /> Login
                         </Badge>{' '}
+                        <Badge pill bg="secondary">
+                            <CartWidget />
+                        </Badge>
                         {/*<Nav.Link href="#deets">More deets</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
                             Dank memes
@@ -37,7 +40,6 @@ const NavBar = (props) => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-    </Fragment>
 }
 
 export default NavBar;
