@@ -11,7 +11,7 @@ const ItemCount = ({stock, initial}) => {
     }
 
     const [itemsQty, setItemsQty] = useState(initial);
-    const [totalItems, addToCart] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
     useEffect(() => {
         console.log("Cambie el item de cantidad","ahora tengo", itemsQty);
         return () => {
@@ -20,7 +20,7 @@ const ItemCount = ({stock, initial}) => {
       },[itemsQty, totalItems]);
 
       const handleLessQty = () => {
-        if(itemsQty > 0){ setItemsQty(itemsQty - 1) }
+        if(itemsQty > initial){ setItemsQty(itemsQty - 1) }
       }
 
       const handlePlusQty = () => {
@@ -28,7 +28,7 @@ const ItemCount = ({stock, initial}) => {
       }
 
       const handleAddToCart = () => {
-        if(stock > 0){ addToCart(totalItems + itemsQty) }
+        if(stock > 0){ setTotalItems(totalItems + itemsQty) }
       }
 
     return (
