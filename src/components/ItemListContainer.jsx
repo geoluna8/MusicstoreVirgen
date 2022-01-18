@@ -13,27 +13,24 @@ const ItemListContainer = ({greeting}) => {
     {id:"246", title:"Tama Superstar", description:"Tama drums professional, includes snare, toms and iron cobra pedal. The professionals choice.", price:12000, pictureUrl:"https://w7.pngwing.com/pngs/997/510/png-transparent-tama-drums-tom-toms-floor-tom-bass-drums-drum-color-drum-cymbal.png", stock:5}]
 
     //se ejecuta la promesa al montar el componente
-    let [itemsData, setItemsData] = useState([]);
+    const [itemsData, setItemsData] = useState([]);
     useEffect(() => {
-        getData();
-      }, []);
+        const task = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let apiResponse = true
+                if (apiResponse){
+                    resolve(mockData)
+                } else {
+                    reject("error al traer la data")
+                }
+            }, 2000) 
+        });
 
-    const task = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            let apiResponse = true
-            if (apiResponse){
-                resolve(mockData)
-            } else {
-                reject("error al traer la data")
-            }
-        }, 2000) 
-    });
-
-    const getData = () => {
         task.then((value) => { setItemsData(value) })
         .catch((reason) => console.log("error", reason))
         .finally((info) => console.log("Finalizo todo"));
-    }
+
+      }, []);
 
     return <Container style={customStyle} fluid>
     <Row>

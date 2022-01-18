@@ -18,7 +18,7 @@ const updatedata = () => {
         <>
         
             { allItems.map(item => {
-                return <Col key={ item.id } xs><Item id={ item.id } title={ item.title } description={ item.description } price={ item.price } pictureUrl={ item.pictureUrl } stock= { item.stock } /></Col> }) 
+                return <Col key={ item.id }><Item id={ item.id } title={ item.title } description={ item.description } price={ item.price } pictureUrl={ item.pictureUrl } stock= { item.stock } /></Col> }) 
             }
      
         </>
