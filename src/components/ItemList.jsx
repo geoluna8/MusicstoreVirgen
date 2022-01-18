@@ -7,12 +7,8 @@ const ItemList = ({ items }) => {
 const [allItems, setItems] = useState([])
 //detectamos cuando el prop items cambie su valor
     useEffect(()=> {
-        updatedata();
+        setItems(items)
     }, [items]);
-
-const updatedata = () => {
-    setItems(items)
-}
 
     return (
         <>
