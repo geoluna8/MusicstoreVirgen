@@ -26,7 +26,7 @@ function App() {
       {/*<Button onClick={ () => setName("Mika")} variant="primary">Cambiar nombre</Button>
       <Button onClick={ () => setItemsQty(itemsQty + 1)} variant="success">Agregar</Button>
       <Button onClick={ () => setItemsQty(itemsQty - 1)} variant="danger">Quitar</Button>*/}
-      <header className="App-header">
+      {/*<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>{name}</h1>
         <h1>{itemsQty}</h1>
@@ -41,7 +41,7 @@ function App() {
         >
           CoderHouse - Geovanny Virgen Luna
         </a>
-      </header>
+    </header>*/}
       <Footer mensaje="Soy el footer"></Footer>
     </div>
   );

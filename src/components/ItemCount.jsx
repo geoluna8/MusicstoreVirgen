@@ -9,22 +9,24 @@ const ItemCount = ({stock, initial}) => {
         borderRadius: "0.4rem",
         background: "#d3d3d326"
     }
-
-    const [itemsQty, setItemsQty] = useState(initial);
+    //const [itemsQty, setItemsQty] = useState(initial)
+    const [itemsQty, setItemsQty] = useState(() => {return initial});
     const [totalItems, setTotalItems] = useState(0);
     useEffect(() => {
         console.log("Cambie el item de cantidad","ahora tengo", itemsQty);
         return () => {
-          console.log("se desmonto el componente")
+          console.log("se desmonto el componente (considerado como cleanup")
         }
       },[itemsQty, totalItems]);
 
       const handleLessQty = () => {
-        if(itemsQty > initial){ setItemsQty(itemsQty - 1) }
+        //setItemsQty(itemsQty - 1)
+        if(itemsQty > initial){ setItemsQty( prevItemsQty => prevItemsQty - 1) }
       }
 
       const handlePlusQty = () => {
-        if(itemsQty < stock){ setItemsQty(itemsQty + 1) }
+          //setItemsQty(itemsQty + 1)
+        if(itemsQty < stock){ setItemsQty( prevItemsQty => prevItemsQty + 1) }
       }
 
       const handleAddToCart = () => {
