@@ -5,10 +5,14 @@ import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import { getProductsFromCategory } from './services/Products';
+import ItemDetailContainer from './components/ItemDetailContainer';
+import Loading from './components/Loading';
 
 function App() {
   const [name, setName] = useState("Eren");
   const [itemsQty, setItemsQty] = useState(0);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     console.log("Cambie el item de cantidad","ahora tengo", itemsQty);
@@ -19,11 +23,27 @@ function App() {
   },[itemsQty]);
   //console.log("si sigo poniendo mensajes aca, estoy haciendo mal");
 
+  useEffect(() => {
+    let mounted = true
+    setLoading(true)
+    getProductsFromCategory("MLA", "MLA1055").then(items => {
+      if(mounted) {
+        console.log(items.results)
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000)
+      }
+    })
+    return () => mounted = false;
+  }, []);
+
   return (
     <div className="App">
       <NavBar titulo="Geo Music Store"></NavBar>
-      <ItemListContainer greeting="¡Coders trabajando! - Sitio en construcción" />
-      {/*<Button onClick={ () => setName("Mika")} variant="primary">Cambiar nombre</Button>
+      <ItemDetailContainer />
+      {loading ? <Loading /> : null} 
+      {/*<ItemListContainer greeting="¡Coders trabajando! - Sitio en construcción" />
+      <Button onClick={ () => setName("Mika")} variant="primary">Cambiar nombre</Button>
       <Button onClick={ () => setItemsQty(itemsQty + 1)} variant="success">Agregar</Button>
       <Button onClick={ () => setItemsQty(itemsQty - 1)} variant="danger">Quitar</Button>*/}
       {/*<header className="App-header">

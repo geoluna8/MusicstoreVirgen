@@ -37,12 +37,12 @@ const ItemListContainer = ({greeting}) => {
       <h1>{greeting}</h1>
     </Row>
     <Row><ItemList items={ itemsData }></ItemList></Row>
-    <Row>
+    {/*<Row>
         <Col>Imagen</Col>
         <Col>Descripción</Col>
         <Col>Precio</Col>
         <Col><ItemCount stock={5} initial={1}></ItemCount></Col>
-    </Row>
+    </Row>*/}
   </Container>
 }
 
