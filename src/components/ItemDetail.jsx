@@ -1,16 +1,15 @@
 import React from 'react';
-import { Button, Col, Image, Row, Figure } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { Col, Image, Row, Figure } from 'react-bootstrap';
+import ItemCount from './ItemCount';
 
-const ItemDetail = ({ item }) => {
+const ItemDetail = ({ id, item }) => {
 
     return (
         <>
-        <Col>
+        <Col sm="8" lg="7">
             <Image src={ item.pictureUrl } rounded="true" fluid="true"></Image>
         </Col>
-        <Col>
+        <Col sm="4" lg="5">
             <Row><h1>{ item.title }</h1></Row>
             <Row>
             <Figure>
@@ -23,12 +22,12 @@ const ItemDetail = ({ item }) => {
                 />
             </Figure>
             </Row>
-            <Row><p>Modelo: <i>{ item.model }</i></p></Row>
+            <Row><p>Modelo: <i>{ item.model }/{ id }</i></p></Row>
             <Row><p>{ item.description }</p></Row>
             <Row><p style={ {marginBottom: "0"} }>Precio regular:</p><p style={ {fontWeight: "bold", color: "burlywood"} }>${ item.price }</p></Row>
             <Row>
                 <div className="mb-2">
-                    <Button variant="primary" size="lg">Agregar al carrito <FontAwesomeIcon icon={faShoppingCart} /></Button>
+                    <ItemCount stock={5} initial={1}></ItemCount>
                 </div>
             </Row> 
         </Col>

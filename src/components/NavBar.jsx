@@ -4,18 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo.png';
 import CartWidget from './CartWidget';
+import { Link } from 'react-router-dom';
 
 const NavBar = ({titulo}) => {
     return  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#home">
-                        <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top"/>{' '}{titulo}
-                    </Navbar.Brand>
+                    <Link to={"/"}>
+                        <Navbar.Brand>
+                            <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top"/>{' '}{titulo}
+                        </Navbar.Brand>
+                    </Link>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                        <Nav.Link href="#guitars">Guitarras</Nav.Link>
-                        <Nav.Link href="#drums">Baterias</Nav.Link>
+                        <Link to={"/category/Instrumentos"}><Nav className="nav-link">Instrumentos</Nav></Link>
+                        <Nav.Link href="#drums">Accesorios</Nav.Link>
                         <Nav.Link href="#recording">Grabación</Nav.Link>
                         {/*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

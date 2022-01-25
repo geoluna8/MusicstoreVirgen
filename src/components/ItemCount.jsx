@@ -1,13 +1,12 @@
 import { React, useState, useEffect  } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const ItemCount = ({stock, initial}) => {
     const rowStyle = {
         border: "1px solid #0e6efd",
-        borderRadius: "0.4rem",
-        background: "#d3d3d326"
+        borderRadius: "0.4rem"
     }
     //const [itemsQty, setItemsQty] = useState(initial)
     const [itemsQty, setItemsQty] = useState(() => {return initial});
@@ -41,7 +40,7 @@ const ItemCount = ({stock, initial}) => {
             <Col style={ {paddingRight: 0} }><Button style={ {float: "right"} } variant="primary" onClick={ handlePlusQty }>+</Button></Col>
         </Row>
         <Row style={ {paddingTop: "15px", background: "#d3d3d326"} }>
-            <Button variant="success" onClick={ handleAddToCart }><FontAwesomeIcon icon={faCartPlus} /></Button>
+            <Button variant="success" onClick={ handleAddToCart }>Agregar al carrito <FontAwesomeIcon icon={faShoppingCart} /></Button>
         </Row>
     </Container> 
     )
