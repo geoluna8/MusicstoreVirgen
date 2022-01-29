@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useOutletContext } from 'react-router-dom';
+import { getProductsFromCategory } from '../services/Products';
 import ItemList  from './ItemList';
 import ItemCount from './ItemCount';
 
 const ItemListContainer = ({greeting}) => {
-    const { id } = useParams();
+    const { name, id } = useParams();
 
     const customStyle = {
         background: "#212529",
@@ -19,29 +20,41 @@ const ItemListContainer = ({greeting}) => {
     const [itemsData, setItemsData] = useState([]);
     const [loading, setLoading] = useOutletContext();
     useEffect(() => {
+        let mounted = true
         const task = new Promise((resolve, reject) => {
             setLoading(true);
-            setTimeout(() => {
-                let apiResponse = true
-                if (apiResponse){
-                    resolve(mockData)
-                    setLoading(false)
-                } else {
-                    reject("error al traer la data")
-                }
-            }, 2000) 
+            //setTimeout(() => {
+            //    let apiResponse = true
+            //    if (apiResponse){
+            //        resolve(mockData)
+            //        setLoading(false)
+            //    } else {
+            //        reject("error al traer la data")
+            //    }
+           //}, 2000)
+
+           getProductsFromCategory("MLM", id == null ? "MLM194141" : id ).then(items => {
+            if(mounted) {
+              console.log(items.results)
+              setTimeout(() => {
+                resolve(items.results)
+                setLoading(false)
+              }, 2000)
+            }
+          });
+
         });
 
         task.then((value) => { setItemsData(value) })
         .catch((reason) => console.log("error", reason))
         .finally((info) => console.log("Finalizo todo"));
-
-      }, []);
+        return () => mounted = false;
+      }, [id]);
 
     return <Container style={customStyle} fluid>
     <Row>
       <h1>{greeting}</h1>
-      <h1>{id}</h1>
+      <h1 style={ { textTransform: "capitalize" } }>{name}</h1>
     </Row>
     <Row><ItemList items={ itemsData }></ItemList></Row>
   </Container>

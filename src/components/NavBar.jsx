@@ -17,9 +17,9 @@ const NavBar = ({titulo}) => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                        <Link to={"/category/Instrumentos"}><Nav className="nav-link">Instrumentos</Nav></Link>
-                        <Nav.Link href="#drums">Accesorios</Nav.Link>
-                        <Nav.Link href="#recording">Grabación</Nav.Link>
+                        <Link to={"/category/guitarras/MLM194141"}><Nav className="nav-link">Guitarras</Nav></Link>
+                        <Link to={"/category/baterias/MLM3004"}><Nav className="nav-link">Baterias y percusiones</Nav></Link>
+                        <Link to={"/category/accesorios/MLM434786"}><Nav className="nav-link">Pedales y accesorios</Nav></Link>
                         {/*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

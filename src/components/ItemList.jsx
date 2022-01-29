@@ -14,7 +14,7 @@ const [allItems, setItems] = useState([])
         <>
         
             { allItems.map(item => {
-                return <Col key={ item.id }><Item id={ item.id } title={ item.title } description={ item.description } price={ item.price } pictureUrl={ item.pictureUrl } stock= { item.stock } /></Col> }) 
+                return <Col key={ item.id }><Item id={ item.id } title={ item.title } price={ item.price } pictureUrl={ item.thumbnail } stock= { item.available_quantity } /></Col> }) 
             }
      
         </>
