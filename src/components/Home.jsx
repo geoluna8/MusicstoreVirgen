@@ -11,6 +11,18 @@ const Home = () => {
   const [itemsQty, setItemsQty] = useState(0);
   const [loading, setLoading] = useOutletContext();
 
+  const handleKeyDown = (event) => {
+    console.log('A key was pressed', event.keyCode);
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    // cleanup this component
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   useEffect(() => {
     console.log("Cambie el item de cantidad","ahora tengo", itemsQty);
     console.log("Cambio en la fecha", new Date());
