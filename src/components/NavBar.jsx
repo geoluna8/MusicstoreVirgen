@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Navbar, Container, Nav, NavDropdown, Badge } from 'react-bootstrap';
+import React, { Fragment, useState } from 'react';
+import { Navbar, Container, Nav, NavDropdown, Badge, Form, FormControl } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo.png';
@@ -7,6 +7,21 @@ import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom';
 
 const NavBar = ({titulo}) => {
+
+    const [onSearch, setOnSearch] = useState(false);
+    const [query, setOnQuery] = useState("");
+    const onSearchChange = (event) => {
+        event.preventDefault();
+        console.log(event.target.value)
+        if(/^(?:[A-Za-z]+|\d+)$/.test(event.target.value)){
+            console.log("letras")
+            setOnQuery(event.target.value)
+            setOnSearch(true)
+        } else {
+            setOnSearch(false)
+        }
+    }
+
     return  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
                     <Link to={"/"}>
@@ -38,8 +53,28 @@ const NavBar = ({titulo}) => {
                         {/*<Nav.Link href="#deets">More deets</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
                             Dank memes
-                        </Nav.Link>*/}
+                        </Nav.Link>
                         </Nav>
+                        <Form style={ {position: "relative"} } className="d-flex">
+                            <FormControl
+                            type="search"
+                            placeholder="Search"
+                            className="me-2"
+                            aria-label="Search"
+                            onChange={onSearchChange}
+                            />
+                            { onSearch ?
+                                <div style={ { position: "absolute", top:36, left: 0, width: 250, height: 300, background: "white", color: "black" } }>
+                                    <li onClick={ () => setOnSearch(false) }>resultado</li>
+                                    <li onClick={ () => setOnSearch(false) }>resultado</li>
+                                    <li onClick={ () => setOnSearch(false) }>resultado</li>
+                                    <li onClick={ () => setOnSearch(false) }>resultado</li>
+                                    <li onClick={ () => setOnSearch(false) }>resultado</li>
+                                    <li onClick={ () => setOnSearch(false) }>resultado</li>
+                                </div>
+                                : null
+                            }
+                        </Form> */} </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

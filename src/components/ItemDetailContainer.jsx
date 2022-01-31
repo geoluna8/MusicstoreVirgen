@@ -12,7 +12,7 @@ const ItemDetailContainer = () => {
         color: "white",
         minHeight: "85vh"
     }
-    const mockItem = {id:"123", title:"Guitarra Eléctrica Lec1000Vb LTD Ec-1000 Vint Blk Emg", model:"LEC1000VB", manufacturer:"Epiphone", manufacturerLogo:"https://scontent.ftpq2-1.fna.fbcdn.net/v/t1.6435-9/183482843_317127196450450_287295515534342543_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=xtBq9dFALCIAX8Kpy65&_nc_ht=scontent.ftpq2-1.fna&oh=00_AT_UbhPb4RcUJfK6INdzXGHUzoD-GMhw4EQOi7g2wh5Qww&oe=620EC880", description:"Guitarra modelo Les Paul estandar equipada con pastillas EMG para mayor fidelidad y potencia, perfecta para grabar en estudio y presentaciones en vivo.", price:8000, pictureUrl:"https://media.istockphoto.com/photos/the-paul-guitar-picture-id509755213?s=612x612", stock:10}
+    const mockItem = {id:"123", title:"Guitarra Eléctrica Lec1000Vb LTD Ec-1000 Vint Blk Emg", model:"LEC1000VB", manufacturer:"Epiphone", manufacturerLogo:"https://scontent.ftpq2-1.fna.fbcdn.net/v/t1.6435-9/183482843_317127196450450_287295515534342543_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=xtBq9dFALCIAX8Kpy65&_nc_ht=scontent.ftpq2-1.fna&oh=00_AT_UbhPb4RcUJfK6INdzXGHUzoD-GMhw4EQOi7g2wh5Qww&oe=620EC880", description:"Guitarra modelo Les Paul estandar equipada con pastillas EMG para mayor fidelidad y potencia, perfecta para grabar en estudio y presentaciones en vivo.", price:8000, pictureUrl:"https://kuhnrikon.com/media/catalog/product/cache/87d9b2a522eea6bb4be38af47d79c618/imp/ort/31555_31556_31557_31558_31559_ps.jpg", stock:10}
 
     //se ejecuta la promesa al montar el componente
     const [itemData, setItemData] = useState([]);

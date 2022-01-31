@@ -1,8 +1,14 @@
 import React from 'react';
 import { Col, Image, Row, Figure } from 'react-bootstrap';
 import ItemCount from './ItemCount';
+import Radio from './Radio';
 
 const ItemDetail = ({ id, item, picture }) => {
+
+    const options = ["eren", "mika", "elrich", "neku"];
+    const onSelect = (option) => {
+        alert(option)
+    }
 
     return (
         <>
@@ -19,6 +25,7 @@ const ItemDetail = ({ id, item, picture }) => {
                 </div>
             </Row> 
         </Col>
+        {/*<Radio options={ options } onSelect={ onSelect }></Radio>*/}
         </>
     )
 }
