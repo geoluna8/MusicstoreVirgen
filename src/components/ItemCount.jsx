@@ -3,33 +3,38 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-const ItemCount = ({stock, initial}) => {
+const ItemCount = ({stock, initial, onAdd}) => {
     const rowStyle = {
         border: "1px solid #0e6efd",
         borderRadius: "0.4rem"
     }
-    //const [itemsQty, setItemsQty] = useState(initial)
-    const [itemsQty, setItemsQty] = useState(() => {return initial});
+
+    const [itemsQty, setItemsQty] = useState(initial)
     const [totalItems, setTotalItems] = useState(0);
     useEffect(() => {
         console.log("Cambie el item de cantidad","ahora tengo", itemsQty);
         return () => {
           console.log("se desmonto el componente (considerado como cleanup")
         }
-      },[itemsQty, totalItems]);
+      },[itemsQty]);
+
+      useEffect(() => {
+        if(totalItems > 0){ onAdd(totalItems)}
+        return () => {}
+      },[totalItems]);
 
       const handleLessQty = () => {
-        //setItemsQty(itemsQty - 1)
-        if(itemsQty > initial){ setItemsQty( prevItemsQty => prevItemsQty - 1) }
+        if(itemsQty > initial){ setItemsQty(itemsQty - 1) }
       }
 
       const handlePlusQty = () => {
-          //setItemsQty(itemsQty + 1)
-        if(itemsQty < stock){ setItemsQty( prevItemsQty => prevItemsQty + 1) }
+        if(itemsQty < stock){ setItemsQty(itemsQty + 1) }
       }
 
       const handleAddToCart = () => {
-        if(stock > 0){ setTotalItems(totalItems + itemsQty) }
+        if(stock > 0){ 
+            setTotalItems(totalItems + itemsQty)
+        }
       }
 
     return (
