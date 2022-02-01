@@ -6,21 +6,24 @@ import Layout from './components/Layout';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
 import Cart from './components/Cart';
+import { CartProvider } from './context/CartContext';
 
 const App = () => {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={ <Layout /> }>
-          <Route index element={ <Home />} />
-          <Route path="/category/:name/:id" element={ <ItemListContainer />} />
-          <Route path="/item/:id" element={ <ItemDetailContainer />} />
-          <Route path="/cart" element={ <Cart />} />
-          <Route path="*" element={ <NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={ <Layout /> }>
+            <Route index element={ <Home />} />
+            <Route path="/category/:name/:id" element={ <ItemListContainer />} />
+            <Route path="/item/:id" element={ <ItemDetailContainer />} />
+            <Route path="/cart" element={ <Cart />} />
+            <Route path="*" element={ <NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 
