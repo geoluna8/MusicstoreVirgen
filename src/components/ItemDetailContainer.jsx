@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useOutletContext } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
 import { getProductDetail, getProductDescription } from '../services/Products';
 import ItemDetail from './ItemDetail' ;
 
 const ItemDetailContainer = () => {
     const { id } = useParams();
+    const { isInCart } = useContext(CartContext);
+    const { cartFlag } = useContext(CartContext); 
 
     const customStyle = {
         background: "rgb(60 72 74)",
@@ -36,6 +39,7 @@ const ItemDetailContainer = () => {
             if (mounted) {
                 setItemData(item)
                 setPicture(results[0].pictures.length > 0 ? results[0].pictures[0].secure_url: mockItem.pictureUrl)
+                isInCart(item.id)
                 setTimeout(() => {
                   setLoading(false)
                 }, 2000)
@@ -47,7 +51,7 @@ const ItemDetailContainer = () => {
 
     return <Container style={customStyle} fluid>
     <Row xs={2} md={2} lg={2} style={ {paddingTop: "30px"} }>
-        <ItemDetail id={ id } item={ itemData } picture={ picture }></ItemDetail>
+        <ItemDetail id={ id } item={ itemData } picture={ picture } inCart={ cartFlag }></ItemDetail>
     </Row>
   </Container>
 }

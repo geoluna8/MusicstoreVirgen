@@ -24,7 +24,7 @@ const NavBar = ({titulo}) => {
 
     return  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
-                    <Link to={"/"}>
+                    <Link to={"/"} style={ { color: "inherit" } }>
                         <Navbar.Brand>
                             <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top"/>{' '}{titulo}
                         </Navbar.Brand>
@@ -32,9 +32,9 @@ const NavBar = ({titulo}) => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                        <Link to={"/category/guitarras/MLM194141"}><Nav className="nav-link">Guitarras</Nav></Link>
-                        <Link to={"/category/baterias/MLM3004"}><Nav className="nav-link">Baterias y percusiones</Nav></Link>
-                        <Link to={"/category/accesorios/MLM434786"}><Nav className="nav-link">Pedales y accesorios</Nav></Link>
+                        <Link style={ { color: "inherit" } } to={"/category/guitarras/MLM194141"}><Nav className="nav-link">Guitarras</Nav></Link>
+                        <Link style={ { color: "inherit" } } to={"/category/baterias/MLM3004"}><Nav className="nav-link">Baterias y percusiones</Nav></Link>
+                        <Link style={ { color: "inherit" } } to={"/category/accesorios/MLM434786"}><Nav className="nav-link">Pedales y accesorios</Nav></Link>
                         {/*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

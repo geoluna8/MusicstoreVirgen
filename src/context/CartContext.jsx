@@ -5,6 +5,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
 
     const [items, setItems] = useState([])
+    const [cartFlag, setCartFlag] = useState(false)
     const cartItems = () => {
         return items.length
     }
@@ -17,8 +18,29 @@ export const CartProvider = ({ children }) => {
         console.log(items)
     }
 
+    const deleteItem = (id) => {
+        let index = items.findIndex( item => item.id === id )
+        if (index > -1) {
+          items.splice(index, 1);
+          setItems([...items]);
+        }
+    }
+
+    const deleteAll = () => {
+        setItems([]);
+    }
+
+    const isInCart = (id) => {
+        let index = items.findIndex( item => item.id === id )
+        if (index > -1) {
+            setCartFlag(true);
+        } else {
+            setCartFlag(false);
+        }
+    }
+
     return(
-        <CartContext.Provider value={{ items, cartItems, addItem }}>
+        <CartContext.Provider value={{ items, cartItems, addItem, deleteItem, deleteAll, isInCart, cartFlag }}>
             {children}
         </CartContext.Provider>
     )

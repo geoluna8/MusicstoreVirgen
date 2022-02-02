@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-const ItemCount = ({stock, initial, onAdd}) => {
+const ItemCount = ({stock, initial, onAdd, inCart}) => {
     const rowStyle = {
         border: "1px solid #0e6efd",
         borderRadius: "0.4rem"
@@ -39,14 +39,20 @@ const ItemCount = ({stock, initial, onAdd}) => {
 
     return (
     <Container>
-        <Row style={ rowStyle } xs={3}>
-            <Col style={ {paddingLeft: 0} }><Button style={ {float: "left"} } variant="primary" onClick={ handleLessQty }>-</Button></Col>
-            <Col style={ {marginTop: "6px"} }><span>{itemsQty}</span></Col>
-            <Col style={ {paddingRight: 0} }><Button style={ {float: "right"} } variant="primary" onClick={ handlePlusQty }>+</Button></Col>
-        </Row>
-        <Row style={ {paddingTop: "15px", background: "#d3d3d326"} }>
-            <Button variant="success" onClick={ handleAddToCart }>Agregar al carrito <FontAwesomeIcon icon={faShoppingCart} /></Button>
-        </Row>
+        {inCart == true ? 
+            <Row>
+                <Button variant="danger">Articulo ya en carrito</Button>
+            </Row>
+            :
+            <><Row style={ rowStyle } xs={3}>
+                <Col style={ {paddingLeft: 0} }><Button style={ {float: "left"} } variant="primary" onClick={ handleLessQty }>-</Button></Col>
+                <Col style={ {marginTop: "6px"} }><span>{itemsQty}</span></Col>
+                <Col style={ {paddingRight: 0} }><Button style={ {float: "right"} } variant="primary" onClick={ handlePlusQty }>+</Button></Col>
+            </Row>
+            <Row style={ {paddingTop: "15px", background: "#d3d3d326"} }>
+                <Button variant="success" onClick={ handleAddToCart }>Agregar al carrito <FontAwesomeIcon icon={faShoppingCart} /></Button>
+            </Row></>
+        }
     </Container> 
     )
 }
