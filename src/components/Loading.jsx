@@ -13,7 +13,7 @@ const Loading = () => {
       };
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(255,255,255,0.85)" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(255,255,255,0.85)", zIndex: "1031" }}>
             <Lottie options={defaultOptions}
                     height={250}
                     width={250}

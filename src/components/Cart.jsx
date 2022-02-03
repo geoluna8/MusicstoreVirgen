@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import { Button, Container, Table, Image } from 'react-bootstrap';
+import { Button, Container, Table, Image, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faTimesCircle} from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -15,6 +16,7 @@ const Cart = () => {
     const { items } = useContext(CartContext);
     const { deleteItem } = useContext(CartContext);
     const { deleteAll } = useContext(CartContext);
+    const { getTotalCart } = useContext(CartContext);
 
     return (<>
     {items.length > 0 ?   
@@ -43,9 +45,19 @@ const Cart = () => {
                     }
                 </tbody>
             </Table>
-            <Button variant="danger" onClick={ () => deleteAll() }>Quitar todos <FontAwesomeIcon icon={ faTrash } /></Button>
+            <Row>
+                <Col><Button variant="danger" onClick={ () => deleteAll() }>Quitar todos los productos <FontAwesomeIcon icon={ faTrash } /></Button></Col>
+                <Col><span>Total a pagar: <b>${ getTotalCart() }</b></span></Col>
+            </Row>
         </Container>
-    :   <Container style={customStyle} fluid><h1>No hay articulos en el carrito :(</h1></Container>
+    :   <Container style={customStyle} fluid>
+            <Row style={ { paddingTop: "20px" } }>
+                <Col><h1>No hay articulos en el carrito :(</h1></Col>    
+            </Row>
+            <Row>
+                <Col><Link to="/" className="btn btn-success">Click aqui para ver productos</Link></Col>
+            </Row>
+        </Container>
     }
     </>)
 }

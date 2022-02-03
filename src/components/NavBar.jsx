@@ -22,7 +22,7 @@ const NavBar = ({titulo}) => {
         }
     }
 
-    return  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    return  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" style={ { borderBottom: "1px solid gold" } }>
                 <Container>
                     <Link to={"/"} style={ { color: "inherit" } }>
                         <Navbar.Brand>
@@ -47,9 +47,11 @@ const NavBar = ({titulo}) => {
                         <Badge pill bg="success">
                             <FontAwesomeIcon icon={faUser} /> Login
                         </Badge>{' '}
-                        <Badge pill bg="secondary">
-                            <CartWidget />
-                        </Badge>
+                        <Link to="/cart" style={ { color: "inherit" } }>
+                            <Badge pill bg="secondary">
+                                <CartWidget />
+                            </Badge>
+                        </Link>
                         {/*<Nav.Link href="#deets">More deets</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
                             Dank memes

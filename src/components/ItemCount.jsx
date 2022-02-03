@@ -39,20 +39,16 @@ const ItemCount = ({stock, initial, onAdd, inCart}) => {
 
     return (
     <Container>
-        {inCart == true ? 
-            <Row>
-                <Button variant="danger">Articulo ya en carrito</Button>
-            </Row>
-            :
-            <><Row style={ rowStyle } xs={3}>
+            <Row style={ rowStyle } xs={3}>
                 <Col style={ {paddingLeft: 0} }><Button style={ {float: "left"} } variant="primary" onClick={ handleLessQty }>-</Button></Col>
                 <Col style={ {marginTop: "6px"} }><span>{itemsQty}</span></Col>
                 <Col style={ {paddingRight: 0} }><Button style={ {float: "right"} } variant="primary" onClick={ handlePlusQty }>+</Button></Col>
             </Row>
             <Row style={ {paddingTop: "15px", background: "#d3d3d326"} }>
-                <Button variant="success" onClick={ handleAddToCart }>Agregar al carrito <FontAwesomeIcon icon={faShoppingCart} /></Button>
-            </Row></>
-        }
+            {inCart == true ? 
+                <Button variant="warning" onClick={ handleAddToCart }>Agregar más <FontAwesomeIcon icon={faShoppingCart} /></Button> :
+                <Button variant="success" onClick={ handleAddToCart }>Agregar al carrito <FontAwesomeIcon icon={faShoppingCart} /></Button> }
+            </Row>   
     </Container> 
     )
 }
