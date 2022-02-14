@@ -39,7 +39,7 @@ const ItemDetailContainer = () => {
             let item = results[0]
             item.description = results[1].plain_text;
             if (mounted) {
-                //setItemData(item)
+                setItemData(item)
                 setPicture(results[0].pictures.length > 0 ? results[0].pictures[0].secure_url: mockItem.pictureUrl)
                 isInCart(item.id)
                 setTimeout(() => {
@@ -58,11 +58,13 @@ const ItemDetailContainer = () => {
         const getFromFirebase = async () => {
             const docRef = doc(db, "items", id)
             const docSnapshot = await getDoc(docRef)
-            //console.log(docSnapshot.data())
+            //console.log(docSnapshot.data(), docSnapshot.id)
             let item = docSnapshot.data()
+            item.id = docSnapshot.id;
             if (mounted) {
                 setPicture(item.thumbnail ? item.thumbnail : mockItem.pictureUrl)
                 setItemData(item)
+                isInCart(item.id)
                 setTimeout(() => {
                   setLoading(false)
                 }, 2000)
@@ -70,7 +72,7 @@ const ItemDetailContainer = () => {
         }
   
         getFromFirebase();
-        return () => {}
+        return () => mounted = false
       }, [id]);
 
     return <Container style={customStyle} fluid>
