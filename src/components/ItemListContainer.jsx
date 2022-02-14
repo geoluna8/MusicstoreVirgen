@@ -4,6 +4,8 @@ import { useParams, useOutletContext } from 'react-router-dom';
 import { getProductsFromCategory } from '../services/Products';
 import ItemList  from './ItemList';
 import ItemCount from './ItemCount';
+import { collection , getDocs, query, where , doc, getDoc} from 'firebase/firestore';
+import { db } from '../firebase';
 
 const ItemListContainer = ({greeting}) => {
     const { name, id } = useParams();
@@ -45,10 +47,25 @@ const ItemListContainer = ({greeting}) => {
 
         });
 
-        task.then((value) => { setItemsData(value) })
+        task.then((value) => { /* setItemsData(value) */ })
         .catch((reason) => console.log("error", reason))
         .finally((info) => console.log("Finalizo todo"));
         return () => mounted = false;
+      }, [id]);
+
+      useEffect(() => {
+        const getFromFirebase = async () => {
+            let firebaseResponse = [];
+            //traer todos los datos
+            //const consulta = collection(db, "items");
+            const consulta = query(collection(db, "items"), where("categoryId", "==", name == null ? "guitarras" : name ));
+            const snapshot = await getDocs(consulta);
+            firebaseResponse = snapshot.docs.map(p => ({id: p.id, ...p.data() }));
+            setItemsData(firebaseResponse)
+        }
+  
+        getFromFirebase();
+        return () => {}
       }, [id]);
 
     return <Container style={customStyle} fluid>

@@ -4,7 +4,8 @@ import ItemListContainer from '../components/ItemListContainer';
 import { Button } from 'react-bootstrap';
 import { getProductsFromCategory } from '../services/Products';
 import ItemDetailContainer from '../components/ItemDetailContainer';
-
+import { collection , getDocs, query, where , doc, getDoc} from 'firebase/firestore';
+import { db } from '../firebase';
 
 const Home = () => {
   const [name, setName] = useState("Eren");
@@ -24,10 +25,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Cambie el item de cantidad","ahora tengo", itemsQty);
-    console.log("Cambio en la fecha", new Date());
+    //console.log("Cambie el item de cantidad","ahora tengo", itemsQty);
+    //console.log("Cambio en la fecha", new Date());
     return () => {
-      console.log("se desmonto el componente")
+      //console.log("se desmonto el componente")
     }
   },[itemsQty]);
   //console.log("si sigo poniendo mensajes aca, estoy haciendo mal");
@@ -37,13 +38,41 @@ const Home = () => {
     setLoading(true)
     getProductsFromCategory("MLA", "MLA1055").then(items => {
       if(mounted) {
-        console.log(items.results)
+        //console.log(items.results)
         setTimeout(() => {
           setLoading(false)
         }, 2000)
       }
     })
     return () => mounted = false;
+  }, []);
+
+  /*Conexion firebase*/
+  useEffect(()=>{
+      const getFromFirebase = async () => {
+          let firebaseResponse = [];
+          //traer todos los datos
+          //const consulta = collection(db, "items");
+          //filtar datos
+          //const consulta = query(collection(db, "items"), where("categoryId", "==", "baterias"));
+          //const snapshot = await getDocs(consulta);
+          /* snapshot.forEach(doc => {
+              //console.log(doc.id, doc.data());
+          }); */
+          //console.log(snapshot.docs.map(p => ({id: p.id, ...p.data() })) );
+          //firebaseResponse = snapshot.docs.map(p => ({id: p.id, ...p.data() }));
+          //console.log(firebaseResponse);
+
+          console.log("Usando getDoc")
+          const docRef = doc(db, "items", "BFqrr55HMQgGBQtib7Y6")
+          const docSnapshot = await getDoc(docRef)
+          console.log(docSnapshot.data())
+
+      }
+
+      getFromFirebase();
+      //result.docs.map(p => ({id: p.id, ...p.data()}) algo asi para agregarle el id, no se olviden
+    return () => {}
   }, []);
 
   return (

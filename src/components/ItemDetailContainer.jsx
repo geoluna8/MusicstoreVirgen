@@ -4,6 +4,8 @@ import { useParams, useOutletContext } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { getProductDetail, getProductDescription } from '../services/Products';
 import ItemDetail from './ItemDetail' ;
+import { collection , getDocs, query, where , doc, getDoc} from 'firebase/firestore';
+import { db } from '../firebase';
 
 const ItemDetailContainer = () => {
     const { id } = useParams();
@@ -21,7 +23,7 @@ const ItemDetailContainer = () => {
     const [itemData, setItemData] = useState([]);
     const [picture, setPicture] = useState(mockItem.pictureUrl)
     const [loading, setLoading] = useOutletContext();
-    useEffect(() => {
+/*     useEffect(() => {
         let mounted = true;
         setLoading(true);
         //const task = new Promise((resolve, reject) => {
@@ -37,7 +39,7 @@ const ItemDetailContainer = () => {
             let item = results[0]
             item.description = results[1].plain_text;
             if (mounted) {
-                setItemData(item)
+                //setItemData(item)
                 setPicture(results[0].pictures.length > 0 ? results[0].pictures[0].secure_url: mockItem.pictureUrl)
                 isInCart(item.id)
                 setTimeout(() => {
@@ -47,6 +49,28 @@ const ItemDetailContainer = () => {
         });
 
         return () => mounted = false
+      }, [id]); */
+
+      useEffect(() => {
+        let mounted = true;
+        setLoading(true);
+
+        const getFromFirebase = async () => {
+            const docRef = doc(db, "items", id)
+            const docSnapshot = await getDoc(docRef)
+            //console.log(docSnapshot.data())
+            let item = docSnapshot.data()
+            if (mounted) {
+                setPicture(item.thumbnail ? item.thumbnail : mockItem.pictureUrl)
+                setItemData(item)
+                setTimeout(() => {
+                  setLoading(false)
+                }, 2000)
+            }
+        }
+  
+        getFromFirebase();
+        return () => {}
       }, [id]);
 
     return <Container style={customStyle} fluid>
