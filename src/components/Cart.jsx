@@ -4,8 +4,6 @@ import { Button, Container, Table, Image, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faTimesCircle, faCheckCircle, faShoppingBag, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { collection , getDocs, query, where , doc, getDoc, addDoc} from 'firebase/firestore';
-import { db } from '../firebase';
 
 
 const Cart = () => {
@@ -20,47 +18,6 @@ const Cart = () => {
     const { deleteItem } = useContext(CartContext);
     const { deleteAll } = useContext(CartContext);
     const { getTotalCart } = useContext(CartContext);
-
-    const [ success, setSuccess ] = useState(false);
-    const [ orderId, setOrderId ] = useState("");
-
-    const checkout = () => {
-        console.log(items)
-        if (items.length === 0 ) {
-            alert("no tienes itemes en el carrito")
-            return
-        }
-        const itemsToBuy = items.map(item => {
-            return {
-                id: item.id,
-                title: item.title,
-                price: item.price,
-                qty: item.qty
-            }
-        })
-
-        const buyer = {
-            name: "Geovanny",
-            phone: "1234567890",
-            email: "geoluna@coderhouse.com"
-        }
-
-        const order = { buyer: buyer, items: itemsToBuy, date: new Date(), total: getTotalCart()}
-
-        console.log(order);
-
-        addDoc( collection(db, "orders"), order)
-        .then(doc => {
-            setOrderId(doc.id)
-            setSuccess(true)
-            console.log("esto es muy sencillo, el id de mi orden creada es", doc.id)
-            deleteAll()
-        })
-        .catch(err => {
-            console.log("algo muy malo paso", err)
-        })
-
-    }
 
     return (<>
     {items.length > 0 ?   
@@ -93,7 +50,7 @@ const Cart = () => {
                 <Col><Button variant="danger" onClick={ () => deleteAll() }>Quitar todos los productos <FontAwesomeIcon icon={ faTrash } /></Button></Col>
                 <Col>
                     <Row><Col><span>Total a pagar: <b>${ getTotalCart() }</b></span></Col></Row>
-                    <Row><Col><Button variant="success" onClick={ () => checkout() }><FontAwesomeIcon icon={ faShoppingBag } /> Pagar</Button></Col></Row>
+                    <Row><Col><Button variant="success" as={Link} to="/cart/checkout"><FontAwesomeIcon icon={ faShoppingBag } /> Checkout</Button></Col></Row>
                 </Col>
             </Row>
         </Container>
@@ -106,29 +63,6 @@ const Cart = () => {
             </Row>
         </Container>
     }
-
-{success ? 
-            <div style={{ 
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100v%",
-                background: "rgb(76 175 80)",
-                textAlign: "center",
-                color: "white",
-                paddingTop: "10%",
-                paddingBottom: "10%"
-            }}>
-                <FontAwesomeIcon style={ {fontSize: "70px"} } icon={ faCheckCircle } />
-                <h1>¡Tu compra se ha realizado exitosamente!</h1>
-                <p>Tu orden ha sido registrada con el folio - <b>{orderId}</b></p>
-                <Button as={Link} to="/">Seguir comprando <FontAwesomeIcon icon={ faShoppingCart } /></Button>
-            </div>
-        :
-            null
-        }
-
     </>)
 }
 
