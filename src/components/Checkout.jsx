@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Button, Container, Row, Col, Form, InputGroup} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAt, faCheckCircle, faPhoneAlt, faShoppingBag, faShoppingCart, faTruck, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faCheckCircle, faPhoneAlt, faShoppingCart, faTruck, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { collection , getDocs, query, where , doc, getDoc, addDoc} from 'firebase/firestore';
+import { collection ,addDoc} from 'firebase/firestore';
 import { db } from '../firebase';
 
 

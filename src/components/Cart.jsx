@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Button, Container, Table, Image, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faTimesCircle, faCheckCircle, faShoppingBag, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faTimesCircle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 
